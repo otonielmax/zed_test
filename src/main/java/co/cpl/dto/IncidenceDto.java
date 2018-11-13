@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class IncidenceDto {
 
     private String id;
+    private String id_user;
     private String title;
+    private String type;
     private String description;
     private String placa;
     private String date_device;
@@ -19,6 +21,14 @@ public class IncidenceDto {
     @JsonProperty("id")
     public String getId() { return id;  }
     public void setId(String id) { this.id = id; }
+
+    @JsonProperty("id_user")
+    public String getIdUser() { return id_user;  }
+    public void setIdUser(String id_user) { this.id_user = id_user; }
+
+    @JsonProperty("type")
+    public String getType() { return type;  }
+    public void setType(String type) { this.type = type;  }
 
     @JsonProperty("title")
     public String getTitle() { return title;  }
@@ -66,6 +76,7 @@ public class IncidenceDto {
     public String toString() {
         return "UsersDto{" +
                 "id='" + id + '\'' +
+                ", id_user='" + id_user + '\'' +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", placa='" + placa + '\'' +
@@ -74,6 +85,7 @@ public class IncidenceDto {
                 ", direction_gps='" + direction_gps + '\'' +
                 ", direction_user='" + direction_user + '\'' +
                 ", status='" + status + '\'' +
+                ", type='" + type + '\'' +
                 ", createDate='" + createdAt + '\'' +
                 ", updateDate='" + updatedAt + '\'' +
                 '}';

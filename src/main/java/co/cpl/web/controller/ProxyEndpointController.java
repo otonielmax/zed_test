@@ -87,7 +87,7 @@ public class ProxyEndpointController extends BaseRestController {
 		}
 		try {
 			Boolean registry = businessManager.createIncidence(load);
-			responseEntity =  ResponseEntity.ok(ResponseKeyName.INCIDENCE_RESPONSE);
+			responseEntity =  ResponseEntity.ok(registry);
 		} catch (HttpClientErrorException ex) {
 			responseEntity = setErrorResponse(ex, request);
 		}
@@ -113,7 +113,7 @@ public class ProxyEndpointController extends BaseRestController {
 		}
 		try {
 			Boolean registry = businessManager.updateIncidence(load);
-			responseEntity =  ResponseEntity.ok(ResponseKeyName.INCIDENCE_RESPONSE);
+			responseEntity =  ResponseEntity.ok(registry);
 		} catch (HttpClientErrorException ex) {
 			responseEntity = setErrorResponse(ex, request);
 		}
@@ -128,7 +128,21 @@ public class ProxyEndpointController extends BaseRestController {
 		ResponseEntity<Object> responseEntity;
 		try {
 			IncidenceDto users = businessManager.findIncidenceById(id);
-			responseEntity = ResponseEntity.ok(ResponseKeyName.INCIDENCE_RESPONSE);
+			responseEntity = ResponseEntity.ok(users);
+		} catch (HttpClientErrorException ex) {
+			responseEntity = setErrorResponse(ex, request);
+		}
+		return responseEntity;
+	}
+
+	@RequestMapping(value = "/mys_incidences/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Object> findIncidenceByIdUser(@PathVariable("id") String id,
+																									HttpServletRequest request) {
+		//TODO: build custom validator for face_plate, if it apply
+		ResponseEntity<Object> responseEntity;
+		try {
+			List<IncidenceDto> users = businessManager.findIncidenceByIdUser(id);
+			responseEntity = ResponseEntity.ok(users);
 		} catch (HttpClientErrorException ex) {
 			responseEntity = setErrorResponse(ex, request);
 		}

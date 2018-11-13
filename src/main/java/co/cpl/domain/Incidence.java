@@ -3,9 +3,11 @@ package co.cpl.domain;
 public class Incidence {
 
     private final String id;
+    private final String id_user;
     private final String title;
     private final String description;
     private final String placa;
+    private final String type;
     private final String date_device;
     private final String date_user;
     private final String direction_gps;
@@ -15,9 +17,11 @@ public class Incidence {
     private final String updatedAt;
 
     public Incidence(String id,
+                 String id_user,
                  String title,
                  String description,
                  String placa,
+                 String type,
                  String date_device,
                  String date_user,
                  String direction_gps,
@@ -26,9 +30,11 @@ public class Incidence {
                  String createdAt,
                  String updatedAt) {
         this.id = id;
+        this.id_user = id_user;
         this.title = title;
         this.description = description;
         this.placa = placa;
+        this.type = type;
         this.date_device = date_device;
         this.date_user = date_user;
         this.direction_gps = direction_gps;
@@ -66,6 +72,10 @@ public class Incidence {
         return placa;
     }
 
+    public String getType() {
+        return type;
+    }
+
     public String getDate_device() {
         return date_device;
     }
@@ -82,12 +92,18 @@ public class Incidence {
         return direction_user;
     }
 
+    public String getId_user() {
+        return id_user;
+    }
+
 
     public static class Builder {
         private String id;
+        private String id_user;
         private String title;
         private String description;
         private String placa;
+        private String type;
         private String date_device;
         private String date_user;
         private String direction_gps;
@@ -98,6 +114,11 @@ public class Incidence {
 
         public Incidence.Builder setId(String id) {
             this.id = id;
+            return this;
+        }
+
+        public Incidence.Builder setIdUser(String id_user) {
+            this.id_user = id_user;
             return this;
         }
 
@@ -114,6 +135,11 @@ public class Incidence {
 
         public Incidence.Builder setStatus(String status) {
             this.status = status;
+            return this;
+        }
+
+        public Incidence.Builder setType(String type) {
+            this.type = type;
             return this;
         }
 
@@ -153,7 +179,7 @@ public class Incidence {
         }
 
         public Incidence build() {
-            return new Incidence(id, title, description, placa, date_device, date_user, direction_gps, direction_user, status, createdAt, updatedAt);
+            return new Incidence(id, id_user, title, description, placa, type, date_device, date_user, direction_gps, direction_user, status, createdAt, updatedAt);
         }
     }
 }

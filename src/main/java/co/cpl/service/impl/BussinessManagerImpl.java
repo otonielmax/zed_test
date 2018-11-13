@@ -60,6 +60,32 @@ public class BussinessManagerImpl implements BusinessManager{
     }
 
     @Override
+    public List<IncidenceDto> findIncidenceByIdUser(String id) {
+        List<Incidence> users = incidenceRepository.findIncidenceByIdUser(id);
+        List<IncidenceDto> response = new LinkedList<>();
+        if(users.isEmpty()) {
+            return response;
+        }
+
+        for (Incidence user: users) {
+            IncidenceDto userDto = new IncidenceDto();
+            userDto.setId(user.getId());
+            userDto.setTitle(user.getTitle());
+            userDto.setDescription(user.getDescription());
+            userDto.setPlaca(user.getPlaca());
+            userDto.setDateDevice(user.getDate_device());
+            userDto.setDateUser(user.getDate_user());
+            userDto.setDirectionGps(user.getDirection_gps());
+            userDto.setStatus(user.getStatus());
+            userDto.setDirectionUser(user.getDirection_user());
+            userDto.setCreateDate(user.getCreatedAt());
+            userDto.setUpdateDate(user.getUpdatedAt());
+            response.add(userDto);
+        }
+        return response;
+    }
+
+    @Override
     public List<IncidenceDto> getIncidences(int limit, int offset) {
         List<Incidence> users = incidenceRepository.getIncidences(limit, offset);
         List<IncidenceDto> response = new LinkedList<>();
@@ -87,7 +113,7 @@ public class BussinessManagerImpl implements BusinessManager{
 
     @Override
     public Boolean createIncidence(IncidenceDto usersDto) {
-        return incidenceRepository.createUser(usersDto);
+        return incidenceRepository.createIncidence(usersDto);
     }
 
     @Override

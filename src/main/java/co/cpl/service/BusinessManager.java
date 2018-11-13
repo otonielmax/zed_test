@@ -27,6 +27,8 @@ public interface BusinessManager {
 
     IncidenceDto findIncidenceById(String id);
 
+    List<IncidenceDto> findIncidenceByIdUser(String id);
+
     List<IncidenceDto> getIncidences(int limit, int offset);
 
     Boolean createIncidence(IncidenceDto usersDto);

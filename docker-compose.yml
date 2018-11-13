@@ -32,7 +32,7 @@ services:
 
 ##################################################################################################################
 ############################################ Application container ################################################
-  cpl-user-api:
+  cpl-incidence-api:
     image: tomcat:8
 # Update container name with your own project proper container name (project-service-type)
     container_name: cpl-incidence-api
@@ -52,6 +52,6 @@ services:
       USERS_JDBC_PASSWORD: cplpassword
 # You must be sure that each application is dispatched by a different port to avoid service crash
     ports:
-      - 5001:8080
+      - 5002:8080
 volumes:
   db_data:

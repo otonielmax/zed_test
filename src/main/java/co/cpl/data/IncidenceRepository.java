@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
 public class IncidenceRepository {
@@ -46,11 +47,42 @@ public class IncidenceRepository {
                                 .setDirectionGPS(rs.getString(7))
                                 .setDirectionUser(rs.getString(8))
                                 .setStatus(rs.getString(9))
-                                .setCreatedAt(rs.getString(10))
-                                .setUpdatedAt(rs.getString(11))
+                                .setIdUser(rs.getString(10))
+                                .setCreatedAt(rs.getString(11))
+                                .setUpdatedAt(rs.getString(12))
                                 .build());
                     });
             return incidence;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Incidence> findIncidenceByIdUser(String id) {
+        QueryRunner run = new QueryRunner(ds);
+        try {
+            String query = "SELECT * FROM cpl_incidence.incidence WHERE id_user = '" + id + "';";
+            return run.query(query,
+                    rs -> {
+                        List<Incidence> newClientsList = new LinkedList<>();
+                        while (rs.next()){
+                            newClientsList.add(new Incidence.Builder()
+                                    .setId(rs.getString(1))
+                                    .setTitle(rs.getString(2))
+                                    .setDescription(rs.getString(3))
+                                    .setPlaca(rs.getString(4))
+                                    .setDateDevice(rs.getString(5))
+                                    .setDateUser(rs.getString(6))
+                                    .setDirectionGPS(rs.getString(7))
+                                    .setDirectionUser(rs.getString(8))
+                                    .setStatus(rs.getString(9))
+                                    .setIdUser(rs.getString(10))
+                                    .setCreatedAt(rs.getString(11))
+                                    .setUpdatedAt(rs.getString(12))
+                                    .build());
+                        }
+                        return newClientsList;
+                    });
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -66,7 +98,6 @@ public class IncidenceRepository {
                         while (rs.next()){
                             newClientsList.add(new Incidence.Builder()
                                     .setId(rs.getString(1))
-                                    .setId(rs.getString(1))
                                     .setTitle(rs.getString(2))
                                     .setDescription(rs.getString(3))
                                     .setPlaca(rs.getString(4))
@@ -75,8 +106,9 @@ public class IncidenceRepository {
                                     .setDirectionGPS(rs.getString(7))
                                     .setDirectionUser(rs.getString(8))
                                     .setStatus(rs.getString(9))
-                                    .setCreatedAt(rs.getString(10))
-                                    .setUpdatedAt(rs.getString(11))
+                                    .setIdUser(rs.getString(10))
+                                    .setCreatedAt(rs.getString(11))
+                                    .setUpdatedAt(rs.getString(12))
                                     .build());
                         }
                         return newClientsList;
@@ -86,15 +118,15 @@ public class IncidenceRepository {
         }
     }
 
-    public Boolean createUser(IncidenceDto IncidenceDto) {
+    public Boolean createIncidence(IncidenceDto IncidenceDto) {
         QueryRunner run = new QueryRunner(ds);
         try {
             String query = "INSERT INTO cpl_incidence.incidence (" +
-                    "title, description, placa, date_device, date_user, direction_gps, direction_user, status" +
+                    "id, title, description, placa, date_device, date_user, direction_gps, direction_user, status, id_user, type" +
                     ") VALUES (" +
-                    "'" + IncidenceDto.getTitle() + "', '" + IncidenceDto.getDescription() + "', '" + IncidenceDto.getPlaca() + "', " +
+                    "'" + UUID.randomUUID().toString() + "', '" + IncidenceDto.getTitle() + "', '" + IncidenceDto.getDescription() + "', '" + IncidenceDto.getPlaca() + "', " +
                     "'" + IncidenceDto.getDateDevice() + "', " + "'" + IncidenceDto.getDateUser() + "', '" + IncidenceDto.getDirectionGps() + "', " +
-                    "'" + IncidenceDto.getDirectionUser() + "', '" + IncidenceDto.getStatus() + "' " +
+                    "'" + IncidenceDto.getDirectionUser() + "', '" + IncidenceDto.getStatus() + "', '" + IncidenceDto.getIdUser() + "', '" + IncidenceDto.getType() + "' " +
                     ");";
 
             int process = run.update(ds.getConnection(), query);

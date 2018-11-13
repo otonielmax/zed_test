@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class UsersDto {
 
     private  String id;
+    private  String id_user;
     private  String name;
     private  String last_name;
     private  String document_type;
@@ -39,6 +40,10 @@ public class UsersDto {
     @JsonProperty("id")
     public String getId() { return id;  }
     public void setId(String id) { this.id = id; }
+
+    @JsonProperty("id_user")
+    public String getIdUser() { return id_user;  }
+    public void setIdUser(String id_user) { this.id_user = id_user; }
 
     @JsonProperty("name")
     public String getName() { return name;  }
@@ -101,6 +106,7 @@ public class UsersDto {
     public String toString() {
         return "UsersDto{" +
                 "id='" + id + '\'' +
+                ", id_user='" + id_user + '\'' +
                 ", name='" + name + '\'' +
                 ", last_name='" + name + '\'' +
                 ", status='" + status + '\'' +
