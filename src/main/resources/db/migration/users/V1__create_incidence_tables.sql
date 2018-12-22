@@ -19,6 +19,15 @@ CREATE TABLE cpl_incidence.incidence (
 );
 
 CREATE INDEX incidence_title ON cpl_incidence.incidence(title);
+CREATE INDEX incidence_id ON cpl_incidence.incidence(id);
 
+CREATE TABLE cpl_incidence.incidence_image (
+  id varchar(36) NOT NULL PRIMARY KEY,
+  url_download varchar(500) DEFAULT NULL,
+  url_display varchar(500) DEFAULT NULL,
+  id_incidence varchar(36) DEFAULT NULL,
+  create_date TIMESTAMP DEFAULT NOW(),
+  update_date TIMESTAMP DEFAULT NOW()
+);
 
-
+CREATE INDEX incidence_image_id ON cpl_incidence.incidence_image(id);

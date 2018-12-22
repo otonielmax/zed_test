@@ -11,6 +11,7 @@
 package co.cpl.service;
 
 import co.cpl.dto.IncidenceDto;
+import co.cpl.dto.IncidenceImageDto;
 import co.cpl.dto.UsersDto;
 
 import java.util.List;
@@ -29,9 +30,15 @@ public interface BusinessManager {
 
     List<IncidenceDto> findIncidenceByIdUser(String id);
 
+    List<IncidenceImageDto> getIncidencesImageByIdIncidence(String id);
+
     List<IncidenceDto> getIncidences(int limit, int offset);
 
+    String getLastIdIncidence();
+
     Boolean createIncidence(IncidenceDto usersDto);
+
+    Boolean createIncidenceImage(IncidenceImageDto usersDto);
 
     Boolean updateIncidence(IncidenceDto usersDto);
 

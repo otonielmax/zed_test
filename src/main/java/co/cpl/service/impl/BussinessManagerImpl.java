@@ -10,9 +10,12 @@
 
 package co.cpl.service.impl;
 
+import co.cpl.data.IncidenceImageRepository;
 import co.cpl.domain.Incidence;
+import co.cpl.domain.IncidenceImage;
 import co.cpl.domain.Users;
 import co.cpl.dto.IncidenceDto;
+import co.cpl.dto.IncidenceImageDto;
 import co.cpl.dto.UsersDto;
 import co.cpl.service.BusinessManager;
 import co.cpl.data.IncidenceRepository;
@@ -36,9 +39,11 @@ public class BussinessManagerImpl implements BusinessManager{
 
     //private IncidenceRepository IncidenceRepository;
     private static IncidenceRepository incidenceRepository;
+    private static IncidenceImageRepository incidenceImageRepository;
 
     public BussinessManagerImpl() {
         incidenceRepository = new IncidenceRepository();
+        incidenceImageRepository = new IncidenceImageRepository();
     }
 
     @Override
@@ -86,6 +91,17 @@ public class BussinessManagerImpl implements BusinessManager{
     }
 
     @Override
+    public String getLastIdIncidence() {
+        List<Incidence> users = incidenceRepository.getLastIdIncidence();
+        List<IncidenceDto> response = new LinkedList<>();
+        if(users.isEmpty()) {
+            return null;
+        }
+
+        return users.get(0).getId();
+    }
+
+    @Override
     public List<IncidenceDto> getIncidences(int limit, int offset) {
         List<Incidence> users = incidenceRepository.getIncidences(limit, offset);
         List<IncidenceDto> response = new LinkedList<>();
@@ -114,6 +130,32 @@ public class BussinessManagerImpl implements BusinessManager{
     @Override
     public Boolean createIncidence(IncidenceDto usersDto) {
         return incidenceRepository.createIncidence(usersDto);
+    }
+
+    @Override
+    public Boolean createIncidenceImage(IncidenceImageDto dto) {
+        return incidenceImageRepository.createIncidenceImage(dto);
+    }
+
+    @Override
+    public List<IncidenceImageDto> getIncidencesImageByIdIncidence(String id) {
+        List<IncidenceImage> users = incidenceImageRepository.getIncidenceImageByIdIncidence(id);
+        List<IncidenceImageDto> response = new LinkedList<>();
+        if(users.isEmpty()) {
+            return response;
+        }
+
+        for (IncidenceImage user: users) {
+            IncidenceImageDto userDto = new IncidenceImageDto();
+            userDto.setId(user.getId());
+            userDto.setUrl(user.getUrl());
+            userDto.setUrlDisplay(user.getUrlDisplay());
+            userDto.setIdIncidence(user.getId_incidence());
+            userDto.setCreateDate(user.getCreatedAt());
+            userDto.setUpdateDate(user.getUpdatedAt());
+            response.add(userDto);
+        }
+        return response;
     }
 
     @Override

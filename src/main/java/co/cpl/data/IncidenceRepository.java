@@ -118,6 +118,36 @@ public class IncidenceRepository {
         }
     }
 
+  public List<Incidence> getLastIdIncidence() {
+    QueryRunner run = new QueryRunner(ds);
+    try {
+      String query = "SELECT * FROM cpl_incidence.incidence ORDER BY create_date DESC LIMIT 1;";
+      return run.query(query,
+              rs -> {
+                List<Incidence> newClientsList = new LinkedList<>();
+                while (rs.next()){
+                  newClientsList.add(new Incidence.Builder()
+                          .setId(rs.getString(1))
+                          .setTitle(rs.getString(2))
+                          .setDescription(rs.getString(3))
+                          .setPlaca(rs.getString(4))
+                          .setDateDevice(rs.getString(5))
+                          .setDateUser(rs.getString(6))
+                          .setDirectionGPS(rs.getString(7))
+                          .setDirectionUser(rs.getString(8))
+                          .setStatus(rs.getString(9))
+                          .setIdUser(rs.getString(10))
+                          .setCreatedAt(rs.getString(11))
+                          .setUpdatedAt(rs.getString(12))
+                          .build());
+                }
+                return newClientsList;
+              });
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
     public Boolean createIncidence(IncidenceDto IncidenceDto) {
         QueryRunner run = new QueryRunner(ds);
         try {
@@ -130,7 +160,6 @@ public class IncidenceRepository {
                     ");";
 
             int process = run.update(ds.getConnection(), query);
-            System.out.println(process);
             return process > 0;
 
         } catch (SQLException e) {
