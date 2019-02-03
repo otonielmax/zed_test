@@ -31,7 +31,7 @@ public class GoogleCloudStorage {
    * is supported and uploads the file to Google Cloud Storage.
    */
   public String getImageUrl(HttpServletRequest req, HttpServletResponse resp,
-                            final String bucket) throws IOException, ServletException {
+                            final String bucket, String directory) throws IOException, ServletException {
     Part filePart = req.getPart("file");
     final String fileName = filePart.getSubmittedFileName();
     String imageUrl = req.getParameter("imageUrl");
@@ -41,7 +41,7 @@ public class GoogleCloudStorage {
       String[] allowedExt = { "jpg", "jpeg", "png", "gif" };
       for (String s : allowedExt) {
         if (extension.equals(s)) {
-          return this.uploadFile(filePart, bucket);
+          return this.uploadFile(filePart, bucket, directory);
         }
       }
       throw new ServletException("file must be an image");
@@ -54,7 +54,7 @@ public class GoogleCloudStorage {
    * environment variable, appending a timestamp to end of the uploaded filename.
    */
   @SuppressWarnings("deprecation")
-  public String uploadFile(Part filePart, final String bucketName) throws IOException {
+  public String uploadFile(Part filePart, final String bucketName, String directory) throws IOException {
     DateTimeFormatter dtf = DateTimeFormat.forPattern("-YYYY-MM-dd-HHmmssSSS");
     DateTime dt = DateTime.now(DateTimeZone.UTC);
     String dtString = dt.toString(dtf);
@@ -64,7 +64,7 @@ public class GoogleCloudStorage {
     BlobInfo blobInfo =
             storage.create(
                     BlobInfo
-                            .newBuilder(bucketName, fileName)
+                            .newBuilder(bucketName, directory + "/" + fileName)
                             // Modify access list to allow all users with link to read file
                             .setAcl(new ArrayList<>(Arrays.asList(Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER))))
                             .build(),
@@ -81,7 +81,12 @@ public class GoogleCloudStorage {
     return nameFile + dtString + ".jpg";
   }
 
-  public String uploadFile(byte[] bytes, final String bucketName, String contentType, final String fileName) throws IOException {
+  public String uploadFile(
+          byte[] bytes,
+          final String bucketName,
+          String contentType,
+          final String fileName,
+          String directory) throws IOException {
     /*
     DateTimeFormatter dtf = DateTimeFormat.forPattern("-YYYY-MM-dd-HHmmssSSS");
     DateTime dt = DateTime.now(DateTimeZone.UTC);
@@ -95,7 +100,7 @@ public class GoogleCloudStorage {
     BlobInfo blobInfo =
             storage.create(
                     BlobInfo
-                            .newBuilder(bucketName, fileName)
+                            .newBuilder(bucketName, directory + "/" + fileName)
                             // Modify access list to allow all users with link to read file
                             .setAcl(new ArrayList<>(Arrays.asList(Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER))))
                             .build(),

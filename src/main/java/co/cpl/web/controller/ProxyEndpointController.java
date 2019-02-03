@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
+import java.util.UUID;
 
 import co.cpl.domain.Incidence;
 import co.cpl.dto.IncidenceDto;
@@ -125,9 +126,10 @@ public class ProxyEndpointController extends BaseRestController {
 				  byte[] data = Base64.decodeBase64(img64);
 
 					// Generamos el nombre del archivo
-					String nameFile = storage.generateNameFile(load.getDescription() + "_" + i);
+					//String nameFile = storage.generateNameFile(load.getDescription() + "_" + i);
 
 					// Seteamos los datos de la guardar la imagen de la incidencia
+					load.getImages().get(i).setId(UUID.randomUUID().toString());
 					load.getImages().get(i).setIdIncidence(idIncidence);
 					load.getImages().get(i).setUrl(
 									// Enviamos la imagen al bucket
@@ -135,9 +137,12 @@ public class ProxyEndpointController extends BaseRestController {
 													data,
 													"incidence-storage",
 													"image/jpeg",
-													nameFile)
+													load.getImages().get(i).getId(),
+													idIncidence
+									)
 					);
-					load.getImages().get(i).setUrlDisplay("https://storage.googleapis.com/incidence-storage/" + nameFile);
+					load.getImages().get(i)
+									.setUrlDisplay("https://storage.googleapis.com/incidence-storage/" + idIncidence + "/" + load.getImages().get(i).getId());
 
 					// Guardamos en BD la info
           businessManager.createIncidenceImage(load.getImages().get(i));

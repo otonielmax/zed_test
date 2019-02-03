@@ -51,14 +51,14 @@ public class IncidenceImageRepository {
     }
   }
 
-  public Boolean createIncidenceImage(IncidenceImageDto IncidenceDto) {
+  public Boolean createIncidenceImage(IncidenceImageDto incidenceImageDto) {
     QueryRunner run = new QueryRunner(ds);
     try {
       String query = "INSERT INTO cpl_incidence.incidence_image (" +
               "id, id_incidence, url_download, url_display" +
               ") VALUES (" +
-              "'" + UUID.randomUUID().toString() + "', '" + IncidenceDto.getIdIncidence() + "', '" + IncidenceDto.getUrl() + "', " +
-              "'" + IncidenceDto.getUrlDisplay() + "' " +
+              "'" + incidenceImageDto.getId() + "', '" + incidenceImageDto.getIdIncidence() + "', '" + incidenceImageDto.getUrl() + "', " +
+              "'" + incidenceImageDto.getUrlDisplay() + "' " +
               ");";
 
       int process = run.update(ds.getConnection(), query);
