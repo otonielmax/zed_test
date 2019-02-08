@@ -11,7 +11,11 @@ public class Incidence {
     private final String date_device;
     private final String date_user;
     private final String direction_gps;
+    private final Double direction_gps_lat;
+    private final Double direction_gps_lng;
     private final String direction_user;
+    private final Double direction_user_lat;
+    private final Double direction_user_lng;
     private final String status;
     private final String createdAt;
     private final String updatedAt;
@@ -28,7 +32,12 @@ public class Incidence {
                  String direction_user,
                  String status,
                  String createdAt,
-                 String updatedAt) {
+                 String updatedAt,
+                 Double direction_gps_lat,
+                 Double direction_gps_lng,
+                 Double direction_user_lat,
+                 Double direction_user_lng
+        ) {
         this.id = id;
         this.id_user = id_user;
         this.title = title;
@@ -38,7 +47,11 @@ public class Incidence {
         this.date_device = date_device;
         this.date_user = date_user;
         this.direction_gps = direction_gps;
+        this.direction_gps_lat = direction_gps_lat;
+        this.direction_gps_lng = direction_gps_lng;
         this.direction_user = direction_user;
+        this.direction_user_lat = direction_user_lat;
+        this.direction_user_lng = direction_user_lng;
         this.status = status;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -88,8 +101,24 @@ public class Incidence {
         return direction_gps;
     }
 
+    public Double getDirectionGpsLat() {
+        return direction_gps_lat;
+    }
+
+    public Double getDirectionGpsLng() {
+        return direction_gps_lng;
+    }
+
     public String getDirection_user() {
         return direction_user;
+    }
+
+    public Double getDirectionUserLat() {
+        return direction_user_lat;
+    }
+
+    public Double getDirectionUserLng() {
+        return direction_user_lng;
     }
 
     public String getId_user() {
@@ -107,7 +136,11 @@ public class Incidence {
         private String date_device;
         private String date_user;
         private String direction_gps;
+        private Double direction_gps_lat;
+        private Double direction_gps_lng;
         private String direction_user;
+        private Double direction_user_lat;
+        private Double direction_user_lng;
         private String status;
         private String createdAt;
         private String updatedAt;
@@ -126,7 +159,6 @@ public class Incidence {
             this.title = title;
             return this;
         }
-
 
         public Incidence.Builder setDescription(String description) {
             this.description = description;
@@ -163,8 +195,28 @@ public class Incidence {
             return this;
         }
 
+        public Incidence.Builder setDirectionGPSLat(Double direction_gps) {
+            this.direction_gps_lat = direction_gps;
+            return this;
+        }
+
+        public Incidence.Builder setDirectionGPSLng(Double direction_gps) {
+            this.direction_gps_lng = direction_gps;
+            return this;
+        }
+
         public Incidence.Builder setDirectionUser(String direction_user) {
             this.direction_user = direction_user;
+            return this;
+        }
+
+        public Incidence.Builder setDirectionUserLat(Double direction_gps) {
+            this.direction_user_lat = direction_gps;
+            return this;
+        }
+
+        public Incidence.Builder setDirectionUserLng(Double direction_gps) {
+            this.direction_user_lng = direction_gps;
             return this;
         }
 
@@ -179,7 +231,7 @@ public class Incidence {
         }
 
         public Incidence build() {
-            return new Incidence(id, id_user, title, description, placa, type, date_device, date_user, direction_gps, direction_user, status, createdAt, updatedAt);
+            return new Incidence(id, id_user, title, description, placa, type, date_device, date_user, direction_gps, direction_user, status, createdAt, updatedAt, direction_gps_lat, direction_gps_lng, direction_user_lat, direction_user_lng);
         }
     }
 }

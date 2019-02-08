@@ -15,7 +15,11 @@ public class IncidenceDto {
     private String date_device;
     private String date_user;
     private String direction_gps;
+    private Double direction_gps_lat;
+    private Double direction_gps_lng;
     private String direction_user;
+    private Double direction_user_lat;
+    private Double direction_user_lng;
     private String status;
     private String createdAt;
     private String updatedAt;
@@ -57,9 +61,25 @@ public class IncidenceDto {
     public String getDirectionGps() { return direction_gps; }
     public void setDirectionGps(String direction_gps) { this.direction_gps = direction_gps; }
 
+    @JsonProperty("lat_capt")
+    public Double getDirectionGpsLat() { return direction_gps_lat; }
+    public void setDirectionGpsLat(Double direction_gps_lat) { this.direction_gps_lat = direction_gps_lat; }
+
+    @JsonProperty("lng_capt")
+    public Double getDirectionGpsLng() { return direction_gps_lng; }
+    public void setDirectionGpsLng(Double direction_gps_lng) { this.direction_gps_lng = direction_gps_lng; }
+
     @JsonProperty("city")
     public String getDirectionUser() { return direction_user; }
     public void setDirectionUser(String direction_user) { this.direction_user = direction_user; }
+
+    @JsonProperty("lat_ingre")
+    public Double getDirectionUserLat() { return direction_user_lat; }
+    public void setDirectionUserLat(Double direction_user_lat) { this.direction_user_lat = direction_user_lat; }
+
+    @JsonProperty("lng_ingre")
+    public Double getDirectionUserLng() { return direction_user_lng; }
+    public void setDirectionUserLng(Double direction_user_lng) { this.direction_user_lng = direction_user_lng; }
 
     @JsonProperty("status")
     public String getStatus() { return status;  }

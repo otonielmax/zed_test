@@ -45,11 +45,16 @@ public class IncidenceRepository {
                                 .setDateDevice(rs.getString(5))
                                 .setDateUser(rs.getString(6))
                                 .setDirectionGPS(rs.getString(7))
-                                .setDirectionUser(rs.getString(8))
-                                .setStatus(rs.getString(9))
-                                .setIdUser(rs.getString(10))
-                                .setCreatedAt(rs.getString(11))
-                                .setUpdatedAt(rs.getString(12))
+                                .setDirectionGPSLat(rs.getDouble(8))
+                                .setDirectionGPSLng(rs.getDouble(9))
+                                .setDirectionUser(rs.getString(10))
+                                .setDirectionUserLat(rs.getDouble(11))
+                                .setDirectionUserLng(rs.getDouble(12))
+                                .setStatus(rs.getString(13))
+                                .setType(rs.getString(14))
+                                .setIdUser(rs.getString(15))
+                                .setCreatedAt(rs.getString(16))
+                                .setUpdatedAt(rs.getString(17))
                                 .build());
                     });
             return incidence;
@@ -74,11 +79,16 @@ public class IncidenceRepository {
                                     .setDateDevice(rs.getString(5))
                                     .setDateUser(rs.getString(6))
                                     .setDirectionGPS(rs.getString(7))
-                                    .setDirectionUser(rs.getString(8))
-                                    .setStatus(rs.getString(9))
-                                    .setIdUser(rs.getString(10))
-                                    .setCreatedAt(rs.getString(11))
-                                    .setUpdatedAt(rs.getString(12))
+                                    .setDirectionGPSLat(rs.getDouble(8))
+                                    .setDirectionGPSLng(rs.getDouble(9))
+                                    .setDirectionUser(rs.getString(10))
+                                    .setDirectionUserLat(rs.getDouble(11))
+                                    .setDirectionUserLng(rs.getDouble(12))
+                                    .setStatus(rs.getString(13))
+                                    .setType(rs.getString(14))
+                                    .setIdUser(rs.getString(15))
+                                    .setCreatedAt(rs.getString(16))
+                                    .setUpdatedAt(rs.getString(17))
                                     .build());
                         }
                         return newClientsList;
@@ -104,11 +114,16 @@ public class IncidenceRepository {
                                     .setDateDevice(rs.getString(5))
                                     .setDateUser(rs.getString(6))
                                     .setDirectionGPS(rs.getString(7))
-                                    .setDirectionUser(rs.getString(8))
-                                    .setStatus(rs.getString(9))
-                                    .setIdUser(rs.getString(10))
-                                    .setCreatedAt(rs.getString(11))
-                                    .setUpdatedAt(rs.getString(12))
+                                    .setDirectionGPSLat(rs.getDouble(8))
+                                    .setDirectionGPSLng(rs.getDouble(9))
+                                    .setDirectionUser(rs.getString(10))
+                                    .setDirectionUserLat(rs.getDouble(11))
+                                    .setDirectionUserLng(rs.getDouble(12))
+                                    .setStatus(rs.getString(13))
+                                    .setType(rs.getString(14))
+                                    .setIdUser(rs.getString(15))
+                                    .setCreatedAt(rs.getString(16))
+                                    .setUpdatedAt(rs.getString(17))
                                     .build());
                         }
                         return newClientsList;
@@ -134,11 +149,16 @@ public class IncidenceRepository {
                           .setDateDevice(rs.getString(5))
                           .setDateUser(rs.getString(6))
                           .setDirectionGPS(rs.getString(7))
-                          .setDirectionUser(rs.getString(8))
-                          .setStatus(rs.getString(9))
-                          .setIdUser(rs.getString(10))
-                          .setCreatedAt(rs.getString(11))
-                          .setUpdatedAt(rs.getString(12))
+                          .setDirectionGPSLat(rs.getDouble(8))
+                          .setDirectionGPSLng(rs.getDouble(9))
+                          .setDirectionUser(rs.getString(10))
+                          .setDirectionUserLat(rs.getDouble(11))
+                          .setDirectionUserLng(rs.getDouble(12))
+                          .setStatus(rs.getString(13))
+                          .setType(rs.getString(14))
+                          .setIdUser(rs.getString(15))
+                          .setCreatedAt(rs.getString(16))
+                          .setUpdatedAt(rs.getString(17))
                           .build());
                 }
                 return newClientsList;
@@ -152,11 +172,12 @@ public class IncidenceRepository {
         QueryRunner run = new QueryRunner(ds);
         try {
             String query = "INSERT INTO cpl_incidence.incidence (" +
-                    "id, title, description, placa, date_device, date_user, direction_gps, direction_user, status, id_user, type" +
-                    ") VALUES (" +
+                    "id, title, description, placa, date_device, date_user, direction_gps, direction_user, status, id_user, type, " +
+                    "direction_gps_lat, direction_gps_lng, direction_user_lat, direction_user_lng) VALUES (" +
                     "'" + UUID.randomUUID().toString() + "', '" + IncidenceDto.getTitle() + "', '" + IncidenceDto.getDescription() + "', '" + IncidenceDto.getPlaca() + "', " +
                     "'" + IncidenceDto.getDateDevice() + "', " + "'" + IncidenceDto.getDateUser() + "', '" + IncidenceDto.getDirectionGps() + "', " +
-                    "'" + IncidenceDto.getDirectionUser() + "', '" + IncidenceDto.getStatus() + "', '" + IncidenceDto.getIdUser() + "', '" + IncidenceDto.getType() + "' " +
+                    "'" + IncidenceDto.getDirectionUser() + "', '" + IncidenceDto.getStatus() + "', '" + IncidenceDto.getIdUser() + "', '" + IncidenceDto.getType() + "', " +
+                    "" + IncidenceDto.getDirectionGpsLat() + ", " + IncidenceDto.getDirectionGpsLng() + ", " + IncidenceDto.getDirectionUserLat() + ", " + IncidenceDto.getDirectionUserLng() + " " +
                     ");";
 
             int process = run.update(ds.getConnection(), query);

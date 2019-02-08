@@ -59,8 +59,13 @@ public class BussinessManagerImpl implements BusinessManager{
         response.setDateUser(users.get().getDate_user());
         response.setPlaca(users.get().getPlaca());
         response.setStatus(users.get().getStatus());
+        response.setType(users.get().getType());
         response.setCreateDate(users.get().getCreatedAt());
         response.setUpdateDate(users.get().getUpdatedAt());
+        response.setDirectionGpsLat(users.get().getDirectionGpsLat());
+        response.setDirectionGpsLng(users.get().getDirectionGpsLng());
+        response.setDirectionUserLat(users.get().getDirectionUserLat());
+        response.setDirectionUserLng(users.get().getDirectionUserLng());
         return response;
     }
 
@@ -82,9 +87,14 @@ public class BussinessManagerImpl implements BusinessManager{
             userDto.setDateUser(user.getDate_user());
             userDto.setDirectionGps(user.getDirection_gps());
             userDto.setStatus(user.getStatus());
+            userDto.setType(user.getType());
             userDto.setDirectionUser(user.getDirection_user());
             userDto.setCreateDate(user.getCreatedAt());
             userDto.setUpdateDate(user.getUpdatedAt());
+            userDto.setDirectionGpsLat(user.getDirectionGpsLat());
+            userDto.setDirectionGpsLng(user.getDirectionGpsLng());
+            userDto.setDirectionUserLat(user.getDirectionUserLat());
+            userDto.setDirectionUserLng(user.getDirectionUserLng());
             response.add(userDto);
         }
         return response;
@@ -93,7 +103,6 @@ public class BussinessManagerImpl implements BusinessManager{
     @Override
     public String getLastIdIncidence() {
         List<Incidence> users = incidenceRepository.getLastIdIncidence();
-        List<IncidenceDto> response = new LinkedList<>();
         if(users.isEmpty()) {
             return null;
         }
@@ -119,9 +128,14 @@ public class BussinessManagerImpl implements BusinessManager{
             userDto.setDateUser(user.getDate_user());
             userDto.setDirectionGps(user.getDirection_gps());
             userDto.setStatus(user.getStatus());
+            userDto.setType(user.getType());
             userDto.setDirectionUser(user.getDirection_user());
             userDto.setCreateDate(user.getCreatedAt());
             userDto.setUpdateDate(user.getUpdatedAt());
+            userDto.setDirectionGpsLat(user.getDirectionGpsLat());
+            userDto.setDirectionGpsLng(user.getDirectionGpsLng());
+            userDto.setDirectionUserLat(user.getDirectionUserLat());
+            userDto.setDirectionUserLng(user.getDirectionUserLng());
             response.add(userDto);
         }
         return response;
