@@ -13,7 +13,7 @@ services:
 ############################################ Database container ##################################################
   db:
     image: mysql:8.0.11
-    container_name: cpl-mysql
+    container_name: zed-mysql
     command: --default-authentication-plugin=mysql_native_password
 # If you have some data and structure already built, then you can add to mysql data volume, if not then keep this
 # configuration.
@@ -22,23 +22,23 @@ services:
     restart: always
 # Update DB environment variables with your own values
     environment:
-      MYSQL_ROOT_PASSWORD: cplpassword
-      MYSQL_DATABASE: cpl_incidence
-      MYSQL_USER: cpincidence
-      MYSQL_PASSWORD: cplpassword
+      MYSQL_ROOT_PASSWORD: zed_test
+      MYSQL_DATABASE: zed_test
+      MYSQL_USER: zed_test
+      MYSQL_PASSWORD: zed_test
 # You must be sure that each application is dispatched by a different port to avoid service crash
     ports:
     - 3307:3306
 
 ##################################################################################################################
 ############################################ Application container ################################################
-  cpl-incidence-api:
+  zed-test-api:
     image: tomcat:8
 # Update container name with your own project proper container name (project-service-type)
-    container_name: cpl-incidence-api
+    container_name: zed-test
 # Update this volume link with your own .war generated file
     volumes:
-      - ${PWD}/target/cpl.incidence.be.api.war:/usr/local/tomcat/webapps/api.war
+      - ${PWD}/target/zed.test.war:/usr/local/tomcat/webapps/api.war
     restart: always
 # Database must be linked to the project to be sure that they are in the same docker network
     links:
@@ -47,9 +47,9 @@ services:
       - db
 # You should create your own env variables to setup your app
     environment:
-      USERS_DB_URL: jdbc:mysql://db:3307/cpl_incidence
-      USERS_JDBC_USERNAME: cplincidence
-      USERS_JDBC_PASSWORD: cplpassword
+      USERS_DB_URL: jdbc:mysql://db:3307/zed_test
+      USERS_JDBC_USERNAME: zed_test
+      USERS_JDBC_PASSWORD: zed_test
 # You must be sure that each application is dispatched by a different port to avoid service crash
     ports:
       - 5002:8080

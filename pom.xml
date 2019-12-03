@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>ca.cpl</groupId>
-	<artifactId>cpl-incidence-be-api</artifactId>
+	<groupId>zed.test</groupId>
+	<artifactId>zed-test</artifactId>
 	<version>0.0.1</version>
 	<packaging>war</packaging>
-	<name>Complaints INCIDENCE</name>
-	<description>Complaints project - Incidence API</description>
+	<name>Zed API</name>
+	<description>Complaints project - Zed API</description>
 
 	<!-- Inherit defaults from Spring Boot. -->
 	<parent>
@@ -37,26 +37,12 @@
 	<developers>
 		<developer>
 			<id>00001</id>
-			<name>Jhonny Munoz</name>
-			<email>jhonnymunoz@gmail.com</email>
+			<name>Otoniel Marquez</name>
+			<email>ing.marquez05@gmail.com</email>
 			<organization>Complaints</organization>
 			<roles>
 				<role>Developer</role>
 				<role>Architect</role>
-			</roles>
-			<properties>
-				<business></business>
-				<mobile></mobile>
-			</properties>
-		</developer>
-		<developer>
-			<id>00002</id>
-			<name>Ruben Ibarra</name>
-			<email>ribarr1@gmail.com</email>
-			<organization>Complaints</organization>
-			<roles>
-				<role>Developer</role>
-				<role>Project Manager</role>
 			</roles>
 			<properties>
 				<business></business>
